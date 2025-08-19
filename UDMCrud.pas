@@ -11,7 +11,7 @@ uses
   FireDAC.Phys.FBDef, FireDAC.Phys.IBBase;
 
 type
-  TDMCrud = class(TDataModule)
+  TDMPrincipal = class(TDataModule)
     FDConnection: TFDConnection;
     FDCrud: TFDQuery;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
@@ -30,7 +30,7 @@ type
 {$R *.dfm}
 
 var
-  DMCrud: TDMCrud;
+  DMPrincipal: TDMPrincipal;
 
 implementation
 

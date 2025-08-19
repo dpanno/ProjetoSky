@@ -1,4 +1,4 @@
-object DMCrud: TDMCrud
+object DMPrincipal: TDMPrincipal
   OldCreateOrder = False
   Height = 334
   Width = 493
@@ -30,7 +30,6 @@ object DMCrud: TDMCrud
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
     object FDCrudNOME: TStringField
       FieldName = 'NOME'

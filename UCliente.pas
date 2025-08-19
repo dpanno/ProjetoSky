@@ -1,4 +1,4 @@
-unit UCadastro;
+unit UCliente;
 
 interface
 

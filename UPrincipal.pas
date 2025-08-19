@@ -36,7 +36,7 @@ uses UCadastro;
 
 procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
 begin
-   CrudCliente.Show;
+   Cliente.Show;
 end;
 
 end.

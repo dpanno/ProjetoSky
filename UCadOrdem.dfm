@@ -1,9 +1,9 @@
-object Cliente: TCliente
+object CadOrdem: TCadOrdem
   Left = 0
   Top = 0
-  Caption = 'Cadastro de cliente'
-  ClientHeight = 382
-  ClientWidth = 576
+  Caption = 'CadOrdem'
+  ClientHeight = 299
+  ClientWidth = 572
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,16 +11,16 @@ object Cliente: TCliente
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 576
+    Width = 572
     Height = 41
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 576
     object btnInserir: TSpeedButton
       Left = 7
       Top = 8
@@ -80,7 +80,6 @@ object Cliente: TCliente
         F749000000000000000049F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFF75B49000049
         5BF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      OnClick = btnInserirClick
     end
     object btnEditar: TSpeedButton
       Left = 119
@@ -102,7 +101,6 @@ object Cliente: TCliente
         70007FF77FFFFFFFFFFFFFFFF707FF7007FFFFFFFFFFFFFFFF8FF70000FFFFFF
         FFFFFFFFFFFF700000FFFFFFFFFFFFFFFFFF700007FFFFFFFFFFFFFFFFFFF700
         7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      OnClick = btnEditarClick
     end
     object btnExcluir: TSpeedButton
       Left = 231
@@ -163,7 +161,6 @@ object Cliente: TCliente
         0000000000000000000000000052FFFFFFFFFFFFFFFFFFFFFFFFFFA400000000
         A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      OnClick = btnExcluirClick
     end
     object btnSalvar: TSpeedButton
       Left = 343
@@ -224,7 +221,6 @@ object Cliente: TCliente
         52FFFFFFFFFFFFF608F6074949A4FFFFFFFFFFFF524949490049494949494949
         49494900A4FFFFFFFFFFFFFFFFF6F6F6F6F6F6F6F6F6F6F6F6F6F6F6FFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      OnClick = btnSalvarClick
     end
     object btnCancelar: TSpeedButton
       Left = 455
@@ -285,20 +281,18 @@ object Cliente: TCliente
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      OnClick = btnCancelarClick
     end
   end
   object PnlCrudCliente: TPanel
     Left = 0
     Top = 41
-    Width = 576
-    Height = 341
+    Width = 572
+    Height = 258
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 568
-    ExplicitHeight = 310
+    ExplicitTop = -42
+    ExplicitWidth = 576
+    ExplicitHeight = 341
     object Label1: TLabel
       Left = 16
       Top = 8
@@ -327,91 +321,32 @@ object Cliente: TCliente
       Height = 13
       Caption = 'Telefone'
     end
-    object edtCliente: TDBEdit
-      Left = 16
-      Top = 24
-      Width = 545
-      Height = 21
-      DataField = 'NOME'
-      DataSource = dsCliente
-      TabOrder = 0
-    end
-    object edtDocumento: TDBEdit
-      Left = 16
-      Top = 64
-      Width = 121
-      Height = 21
-      DataField = 'DOCUMENTO'
-      DataSource = dsCliente
-      TabOrder = 1
-    end
-    object edtEmail: TDBEdit
-      Left = 144
-      Top = 64
-      Width = 418
-      Height = 21
-      DataField = 'EMAIL'
-      DataSource = dsCliente
-      TabOrder = 2
-    end
-    object edtTelefone: TDBEdit
-      Left = 16
-      Top = 104
-      Width = 545
-      Height = 21
-      DataField = 'TELEFONE'
-      DataSource = dsCliente
-      TabOrder = 3
-    end
     object GridCliente: TDBGrid
       Left = 1
       Top = 131
-      Width = 574
-      Height = 209
+      Width = 570
+      Height = 126
       Align = alBottom
-      DataSource = dsCliente
-      TabOrder = 4
+      DataSource = dsOrdem
+      TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'ID'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOME'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DOCUMENTO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'EMAIL'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TELEFONE'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DATACADASTRO'
-          Visible = True
-        end>
+    end
+    object DateTimePicker1: TDateTimePicker
+      Left = 328
+      Top = 48
+      Width = 186
+      Height = 21
+      Date = 45888.555444687500000000
+      Time = 45888.555444687500000000
+      TabOrder = 1
     end
   end
-  object dsCliente: TDataSource
-    DataSet = DMPrincipal.FDCliente
-    Left = 509
-    Top = 233
+  object dsOrdem: TDataSource
+    Left = 512
+    Top = 201
   end
 end
