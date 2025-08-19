@@ -104,8 +104,13 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="UCadastro.pas">
-            <Form>Form2</Form>
+            <Form>UCadCliente</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UDMCrud.pas">
+            <Form>DMCrud</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

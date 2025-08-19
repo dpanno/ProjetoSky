@@ -18,6 +18,7 @@ type
     Ordemdeservio2: TMenuItem;
     Movimentao1: TMenuItem;
     CalculodeSLA1: TMenuItem;
+    procedure Cadastrodeordemdeservio2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,5 +31,12 @@ var
 implementation
 
 {$R *.dfm}
+
+uses UCadastro;
+
+procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
+begin
+   CrudCliente.Show;
+end;
 
 end.

@@ -1,4 +1,4 @@
-object Form2: TForm2
+object CrudCliente: TCrudCliente
   Left = 0
   Top = 0
   Caption = 'Cadastro de cliente'
@@ -11,6 +11,7 @@ object Form2: TForm2
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -53,6 +54,8 @@ object Form2: TForm2
       Top = 24
       Width = 545
       Height = 21
+      DataField = 'NOME'
+      DataSource = dsCrud
       TabOrder = 0
     end
     object edtDocumento: TDBEdit
@@ -60,13 +63,17 @@ object Form2: TForm2
       Top = 64
       Width = 121
       Height = 21
+      DataField = 'DOCUMENTO'
+      DataSource = dsCrud
       TabOrder = 1
     end
     object edtEmail: TDBEdit
-      Left = 143
-      Top = 67
+      Left = 144
+      Top = 64
       Width = 418
       Height = 21
+      DataField = 'EMAIL'
+      DataSource = dsCrud
       TabOrder = 2
     end
     object edtTelefone: TDBEdit
@@ -74,6 +81,8 @@ object Form2: TForm2
       Top = 104
       Width = 545
       Height = 21
+      DataField = 'TELEFONE'
+      DataSource = dsCrud
       TabOrder = 3
     end
     object DBGrid1: TDBGrid
@@ -82,12 +91,44 @@ object Form2: TForm2
       Width = 574
       Height = 120
       Align = alBottom
+      DataSource = dsCrud
       TabOrder = 4
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DOCUMENTO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EMAIL'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TELEFONE'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATACADASTRO'
+          Visible = True
+        end>
     end
   end
   object Panel2: TPanel
@@ -97,7 +138,7 @@ object Form2: TForm2
     Height = 41
     Align = alTop
     TabOrder = 1
-    object SpeedButton1: TSpeedButton
+    object btnInserir: TSpeedButton
       Left = 7
       Top = 8
       Width = 106
@@ -156,8 +197,9 @@ object Form2: TForm2
         F749000000000000000049F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFF75B49000049
         5BF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnInserirClick
     end
-    object SpeedButton2: TSpeedButton
+    object btnEditar: TSpeedButton
       Left = 119
       Top = 8
       Width = 106
@@ -177,8 +219,9 @@ object Form2: TForm2
         70007FF77FFFFFFFFFFFFFFFF707FF7007FFFFFFFFFFFFFFFF8FF70000FFFFFF
         FFFFFFFFFFFF700000FFFFFFFFFFFFFFFFFF700007FFFFFFFFFFFFFFFFFFF700
         7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnEditarClick
     end
-    object SpeedButton3: TSpeedButton
+    object btnExcluir: TSpeedButton
       Left = 231
       Top = 8
       Width = 106
@@ -237,8 +280,9 @@ object Form2: TForm2
         0000000000000000000000000052FFFFFFFFFFFFFFFFFFFFFFFFFFA400000000
         A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnExcluirClick
     end
-    object SpeedButton4: TSpeedButton
+    object btnSalvar: TSpeedButton
       Left = 343
       Top = 8
       Width = 106
@@ -297,8 +341,9 @@ object Form2: TForm2
         52FFFFFFFFFFFFF608F6074949A4FFFFFFFFFFFF524949490049494949494949
         49494900A4FFFFFFFFFFFFFFFFF6F6F6F6F6F6F6F6F6F6F6F6F6F6F6FFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnSalvarClick
     end
-    object SpeedButton5: TSpeedButton
+    object btnCancelar: TSpeedButton
       Left = 455
       Top = 8
       Width = 106
@@ -357,6 +402,13 @@ object Form2: TForm2
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnCancelarClick
     end
+  end
+  object dsCrud: TDataSource
+    DataSet = DMCrud.FDCrud
+    Enabled = False
+    Left = 504
+    Top = 233
   end
 end

@@ -10,14 +10,14 @@ uses
   Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
-  TForm2 = class(TForm)
+  TCrudCliente = class(TForm)
     Panel1: TPanel;
     Panel2: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
+    btnInserir: TSpeedButton;
+    btnEditar: TSpeedButton;
+    btnExcluir: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    btnCancelar: TSpeedButton;
     edtCliente: TDBEdit;
     Label1: TLabel;
     edtDocumento: TDBEdit;
@@ -27,6 +27,13 @@ type
     edtTelefone: TDBEdit;
     Telefone: TLabel;
     DBGrid1: TDBGrid;
+    dsCrud: TDataSource;
+    procedure FormShow(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,10 +41,42 @@ type
   end;
 
 var
-  Form2: TForm2;
+  CrudCliente: TCrudCliente;
 
 implementation
 
 {$R *.dfm}
+
+uses UDMCrud;
+
+procedure TCrudCliente.btnCancelarClick(Sender: TObject);
+begin
+  DMCrud.FDCrud.Cancel;
+end;
+
+procedure TCrudCliente.btnEditarClick(Sender: TObject);
+begin
+  DMCrud.FDCrud.Edit;
+end;
+
+procedure TCrudCliente.btnExcluirClick(Sender: TObject);
+begin
+  DMCrud.FDCrud.Delete;
+end;
+
+procedure TCrudCliente.btnInserirClick(Sender: TObject);
+begin
+  DMCrud.FDCrud.Insert;
+end;
+
+procedure TCrudCliente.btnSalvarClick(Sender: TObject);
+begin
+  DMCrud.FDCrud.Post;
+end;
+
+procedure TCrudCliente.FormShow(Sender: TObject);
+begin
+  DMCrud.FDCrud.Open;
+end;
 
 end.
