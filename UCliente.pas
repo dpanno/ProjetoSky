@@ -36,8 +36,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
   private
     procedure ControlarBotoes;
-  public
-    { Public declarations }
   end;
 
 var
@@ -52,8 +50,10 @@ uses UDMCrud, UDMPrincipal;
 procedure TCliente.ControlarBotoes;
 begin
   btnInserir.Enabled := not(DMPrincipal.FDCliente.State in [dsInsert, dsEdit]);
-  btnEditar.Enabled := (DMPrincipal.FDCliente.RecordCount > 0) and btnInserir.Enabled;
-  btnExcluir.Enabled := (DMPrincipal.FDCliente.RecordCount > 0) and btnInserir.Enabled;
+  btnEditar.Enabled := (DMPrincipal.FDCliente.RecordCount > 0) and
+    btnInserir.Enabled;
+  btnExcluir.Enabled := (DMPrincipal.FDCliente.RecordCount > 0) and
+    btnInserir.Enabled;
   btnSalvar.Enabled := DMPrincipal.FDCliente.State in [dsInsert, dsEdit];
   btnCancelar.Enabled := DMPrincipal.FDCliente.State in [dsInsert, dsEdit];
 end;
@@ -61,8 +61,8 @@ end;
 procedure TCliente.btnCancelarClick(Sender: TObject);
 begin
   DMPrincipal.FDCliente.Cancel;
-  ControlarBotoes;
   DMPrincipal.FDCliente.Refresh;
+  ControlarBotoes;
 end;
 
 procedure TCliente.btnEditarClick(Sender: TObject);
@@ -74,8 +74,8 @@ end;
 procedure TCliente.btnExcluirClick(Sender: TObject);
 begin
   DMPrincipal.FDCliente.Delete;
-  ControlarBotoes;
   DMPrincipal.FDCliente.Refresh;
+  ControlarBotoes;
 end;
 
 procedure TCliente.btnInserirClick(Sender: TObject);
@@ -87,8 +87,8 @@ end;
 procedure TCliente.btnSalvarClick(Sender: TObject);
 begin
   DMPrincipal.FDCliente.Post;
-  ControlarBotoes;
   DMPrincipal.FDCliente.Refresh;
+  ControlarBotoes;
 end;
 
 procedure TCliente.FormShow(Sender: TObject);

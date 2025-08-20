@@ -2,7 +2,7 @@ object CadOrdem: TCadOrdem
   Left = 0
   Top = 0
   Caption = 'CadOrdem'
-  ClientHeight = 299
+  ClientHeight = 402
   ClientWidth = 572
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object CadOrdem: TCadOrdem
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
@@ -20,7 +21,6 @@ object CadOrdem: TCadOrdem
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 576
     object btnInserir: TSpeedButton
       Left = 7
       Top = 8
@@ -80,6 +80,7 @@ object CadOrdem: TCadOrdem
         F749000000000000000049F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFF75B49000049
         5BF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnInserirClick
     end
     object btnEditar: TSpeedButton
       Left = 119
@@ -101,6 +102,7 @@ object CadOrdem: TCadOrdem
         70007FF77FFFFFFFFFFFFFFFF707FF7007FFFFFFFFFFFFFFFF8FF70000FFFFFF
         FFFFFFFFFFFF700000FFFFFFFFFFFFFFFFFF700007FFFFFFFFFFFFFFFFFFF700
         7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnEditarClick
     end
     object btnExcluir: TSpeedButton
       Left = 231
@@ -161,6 +163,7 @@ object CadOrdem: TCadOrdem
         0000000000000000000000000052FFFFFFFFFFFFFFFFFFFFFFFFFFA400000000
         A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnExcluirClick
     end
     object btnSalvar: TSpeedButton
       Left = 343
@@ -221,6 +224,7 @@ object CadOrdem: TCadOrdem
         52FFFFFFFFFFFFF608F6074949A4FFFFFFFFFFFF524949490049494949494949
         49494900A4FFFFFFFFFFFFFFFFF6F6F6F6F6F6F6F6F6F6F6F6F6F6F6FFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnSalvarClick
     end
     object btnCancelar: TSpeedButton
       Left = 455
@@ -281,49 +285,62 @@ object CadOrdem: TCadOrdem
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnCancelarClick
     end
   end
   object PnlCrudCliente: TPanel
     Left = 0
     Top = 41
     Width = 572
-    Height = 258
+    Height = 361
     Align = alClient
     TabOrder = 1
-    ExplicitTop = -42
-    ExplicitWidth = 576
-    ExplicitHeight = 341
+    ExplicitHeight = 258
     object Label1: TLabel
       Left = 16
       Top = 8
-      Width = 61
+      Width = 83
       Height = 13
-      Caption = 'Nome cliente'
+      Caption = 'Data de abertura'
     end
     object Label2: TLabel
       Left = 16
       Top = 48
-      Width = 54
+      Width = 108
       Height = 13
-      Caption = 'Documento'
+      Caption = 'Descri'#231#227'o do problema'
     end
     object Label3: TLabel
-      Left = 143
-      Top = 48
-      Width = 24
+      Left = 119
+      Top = 6
+      Width = 65
       Height = 13
-      Caption = 'Email'
+      Caption = 'Data Prevista'
     end
     object Telefone: TLabel
-      Left = 16
-      Top = 88
+      Left = 496
+      Top = 6
       Width = 42
       Height = 13
       Caption = 'Telefone'
     end
+    object Label4: TLabel
+      Left = 222
+      Top = 8
+      Width = 98
+      Height = 13
+      Caption = 'Data de fechamento'
+    end
+    object Label5: TLabel
+      Left = 326
+      Top = 8
+      Width = 31
+      Height = 13
+      Caption = 'Status'
+    end
     object GridCliente: TDBGrid
       Left = 1
-      Top = 131
+      Top = 234
       Width = 570
       Height = 126
       Align = alBottom
@@ -335,17 +352,58 @@ object CadOrdem: TCadOrdem
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
     end
-    object DateTimePicker1: TDateTimePicker
-      Left = 328
-      Top = 48
-      Width = 186
+    object edtDataAbertura: TDBEdit
+      Left = 16
+      Top = 24
+      Width = 97
       Height = 21
-      Date = 45888.555444687500000000
-      Time = 45888.555444687500000000
+      DataField = 'DATA_ABERTURA'
+      DataSource = dsOrdem
       TabOrder = 1
+      OnKeyPress = edtDataAberturaKeyPress
+    end
+    object edtDataPrevista: TDBEdit
+      Left = 119
+      Top = 24
+      Width = 97
+      Height = 21
+      DataField = 'DATA_PREVISTA'
+      DataSource = dsOrdem
+      TabOrder = 2
+      OnKeyPress = edtDataPrevistaKeyPress
+    end
+    object edtDataFechamento: TDBEdit
+      Left = 222
+      Top = 24
+      Width = 98
+      Height = 21
+      DataField = 'DATA_FECHAMENTO'
+      DataSource = dsOrdem
+      TabOrder = 3
+      OnKeyPress = edtDataFechamentoKeyPress
+    end
+    object DBComboBox1: TDBComboBox
+      Left = 326
+      Top = 24
+      Width = 145
+      Height = 21
+      Items.Strings = (
+        'Aberta'
+        'Em Andamento'
+        'Conclu'#237'da'
+        'Cancelada')
+      TabOrder = 4
+    end
+    object mmDescProblema: TDBMemo
+      Left = 16
+      Top = 67
+      Width = 537
+      Height = 89
+      TabOrder = 5
     end
   end
   object dsOrdem: TDataSource
+    DataSet = DMPrincipal.FDOrdServico
     Left = 512
     Top = 201
   end

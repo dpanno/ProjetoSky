@@ -2,7 +2,7 @@ object Principal: TPrincipal
   Left = 0
   Top = 0
   Caption = 'Menu principal'
-  ClientHeight = 259
+  ClientHeight = 219
   ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object Principal: TPrincipal
     Left = 0
     Top = 0
     Width = 635
-    Height = 259
+    Height = 219
     Align = alClient
     TabOrder = 0
   end
@@ -30,6 +30,10 @@ object Principal: TPrincipal
       object Cadastrodeordemdeservio2: TMenuItem
         Caption = 'Cliente'
         OnClick = Cadastrodeordemdeservio2Click
+      end
+      object Ordemdeservio3: TMenuItem
+        Caption = 'Ordem de servi'#231'o'
+        OnClick = Ordemdeservio3Click
       end
     end
     object Consultas1: TMenuItem

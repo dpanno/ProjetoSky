@@ -295,10 +295,6 @@ object Cliente: TCliente
     Height = 341
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 568
-    ExplicitHeight = 310
     object Label1: TLabel
       Left = 16
       Top = 8

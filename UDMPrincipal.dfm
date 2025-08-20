@@ -76,13 +76,12 @@ object DMPrincipal: TDMPrincipal
       '    A.STATUS, A.DESCRICAO_PROBLEMA, A.VALOR_TOTAL'
       'FROM'
       '    ORDEM_SERVICO A')
-    Left = 124
+    Left = 140
     Top = 56
     object FDOrdServicoID: TIntegerField
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
     object FDOrdServicoCLIENTE_ID: TIntegerField
       DisplayLabel = 'C'#243'd. cliente'

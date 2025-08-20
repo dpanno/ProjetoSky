@@ -3,7 +3,8 @@ unit UPrincipal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls;
 
 type
@@ -18,7 +19,9 @@ type
     Ordemdeservio2: TMenuItem;
     Movimentao1: TMenuItem;
     CalculodeSLA1: TMenuItem;
+    Ordemdeservio3: TMenuItem;
     procedure Cadastrodeordemdeservio2Click(Sender: TObject);
+    procedure Ordemdeservio3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,11 +35,16 @@ implementation
 
 {$R *.dfm}
 
-uses UCadastro;
+uses UCadastro, UCadOrdem;
 
 procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
 begin
-   Cliente.Show;
+  Cliente.Show;
+end;
+
+procedure TPrincipal.Ordemdeservio3Click(Sender: TObject);
+begin
+  CadOrdem.Show;
 end;
 
 end.
