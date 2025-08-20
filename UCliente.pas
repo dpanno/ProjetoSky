@@ -34,8 +34,11 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure ControlarBotoes;
+  public
+    { Public declarations }
   end;
 
 var
@@ -89,6 +92,11 @@ begin
   DMPrincipal.FDCliente.Post;
   DMPrincipal.FDCliente.Refresh;
   ControlarBotoes;
+end;
+
+procedure TCliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DMPrincipal.FDCliente.Close;
 end;
 
 procedure TCliente.FormShow(Sender: TObject);

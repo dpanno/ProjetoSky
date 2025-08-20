@@ -57,6 +57,7 @@ object DMPrincipal: TDMPrincipal
       Size = 30
     end
     object FDClienteDATACADASTRO: TSQLTimeStampField
+      DisplayLabel = 'Data de cadastro'
       FieldName = 'DATACADASTRO'
       Origin = 'DATACADASTRO'
     end
@@ -122,6 +123,62 @@ object DMPrincipal: TDMPrincipal
       DisplayLabel = 'Valor total'
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
+      Precision = 18
+      Size = 2
+    end
+  end
+  object FDItemOrd: TFDQuery
+    OnNewRecord = FDItemOrdNewRecord
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT'
+      
+        '    A.ID, A.ORDEM_ID, A.DESCRICAO, A.QUANTIDADE, A.VALOR_UNITARI' +
+        'O'
+      'FROM'
+      '    ITEM_ORDEM A'
+      'WHERE'
+      '    A.ORDEM_ID = :IDPAI')
+    Left = 224
+    Top = 56
+    ParamData = <
+      item
+        Name = 'IDPAI'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object FDItemOrdID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDItemOrdORDEM_ID: TIntegerField
+      DisplayLabel = 'C'#243'd ordem'
+      FieldName = 'ORDEM_ID'
+      Origin = 'ORDEM_ID'
+      Required = True
+    end
+    object FDItemOrdDESCRICAO: TStringField
+      DisplayLabel = 'Decri'#231#227'o da ordem'
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Required = True
+      Size = 200
+    end
+    object FDItemOrdQUANTIDADE: TBCDField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'QUANTIDADE'
+      Origin = 'QUANTIDADE'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object FDItemOrdVALOR_UNITARIO: TBCDField
+      DisplayLabel = 'Valor unit'#225'rio'
+      FieldName = 'VALOR_UNITARIO'
+      Origin = 'VALOR_UNITARIO'
+      Required = True
       Precision = 18
       Size = 2
     end

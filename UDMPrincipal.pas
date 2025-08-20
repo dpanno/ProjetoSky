@@ -30,7 +30,14 @@ type
     FDOrdServicoSTATUS: TStringField;
     FDOrdServicoDESCRICAO_PROBLEMA: TStringField;
     FDOrdServicoVALOR_TOTAL: TBCDField;
+    FDItemOrd: TFDQuery;
+    FDItemOrdID: TIntegerField;
+    FDItemOrdORDEM_ID: TIntegerField;
+    FDItemOrdDESCRICAO: TStringField;
+    FDItemOrdQUANTIDADE: TBCDField;
+    FDItemOrdVALOR_UNITARIO: TBCDField;
     procedure FDClienteAfterPost(DataSet: TDataSet);
+    procedure FDItemOrdNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -47,6 +54,12 @@ implementation
 procedure TDMPrincipal.FDClienteAfterPost(DataSet: TDataSet);
 begin
 
+end;
+
+procedure TDMPrincipal.FDItemOrdNewRecord(DataSet: TDataSet);
+begin
+  DataSet.FieldByName('ORDEM_ID').AsInteger := FDOrdServico.FieldByName('ID')
+    .AsInteger;
 end;
 
 initialization

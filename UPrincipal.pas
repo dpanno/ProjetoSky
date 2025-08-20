@@ -35,16 +35,16 @@ implementation
 
 {$R *.dfm}
 
-uses UCadastro, UCadOrdem;
+uses UCliente, UCadOrdem;
 
 procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
 begin
-  Cliente.Show;
+  TCliente.Create(Self).Show;
 end;
 
 procedure TPrincipal.Ordemdeservio3Click(Sender: TObject);
 begin
-  CadOrdem.Show;
+  TCadOrdem.Create(Self).Show;
 end;
 
 end.

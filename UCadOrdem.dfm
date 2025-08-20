@@ -288,123 +288,275 @@ object CadOrdem: TCadOrdem
       OnClick = btnCancelarClick
     end
   end
-  object PnlCrudCliente: TPanel
+  object pcPrincipal: TPageControl
     Left = 0
     Top = 41
     Width = 572
     Height = 361
+    ActivePage = tsItemOrdem
     Align = alClient
+    Style = tsFlatButtons
     TabOrder = 1
-    ExplicitHeight = 258
-    object Label1: TLabel
-      Left = 16
-      Top = 8
-      Width = 83
-      Height = 13
-      Caption = 'Data de abertura'
+    OnChange = pcPrincipalChange
+    object tsOrdemServico: TTabSheet
+      Caption = 'Ordem de servi'#231'o'
+      object pnlCrudOrdem: TPanel
+        Left = 0
+        Top = 0
+        Width = 564
+        Height = 330
+        Align = alClient
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 16
+          Top = 8
+          Width = 83
+          Height = 13
+          Caption = 'Data de abertura'
+        end
+        object Label2: TLabel
+          Left = 16
+          Top = 89
+          Width = 108
+          Height = 13
+          Caption = 'Descri'#231#227'o do problema'
+        end
+        object Label3: TLabel
+          Left = 117
+          Top = 6
+          Width = 65
+          Height = 13
+          Caption = 'Data Prevista'
+        end
+        object Telefone: TLabel
+          Left = 432
+          Top = 5
+          Width = 49
+          Height = 13
+          Caption = 'Valor total'
+        end
+        object Label4: TLabel
+          Left = 218
+          Top = 6
+          Width = 98
+          Height = 13
+          Caption = 'Data de fechamento'
+        end
+        object Label5: TLabel
+          Left = 322
+          Top = 5
+          Width = 31
+          Height = 13
+          Caption = 'Status'
+        end
+        object Label6: TLabel
+          Left = 16
+          Top = 51
+          Width = 33
+          Height = 13
+          Caption = 'Cliente'
+        end
+        object GridCliente: TDBGrid
+          Left = 1
+          Top = 206
+          Width = 562
+          Height = 123
+          Align = alBottom
+          DataSource = dsOrdem
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CLIENTE_ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_ABERTURA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_PREVISTA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_FECHAMENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'STATUS'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO_PROBLEMA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_TOTAL'
+              Visible = True
+            end>
+        end
+        object edtDataAbertura: TDBEdit
+          Left = 16
+          Top = 24
+          Width = 95
+          Height = 21
+          DataField = 'DATA_ABERTURA'
+          DataSource = dsOrdem
+          TabOrder = 1
+          OnKeyPress = edtDataAberturaKeyPress
+        end
+        object edtDataPrevista: TDBEdit
+          Left = 117
+          Top = 24
+          Width = 95
+          Height = 21
+          DataField = 'DATA_PREVISTA'
+          DataSource = dsOrdem
+          TabOrder = 2
+          OnKeyPress = edtDataPrevistaKeyPress
+        end
+        object edtDataFechamento: TDBEdit
+          Left = 218
+          Top = 24
+          Width = 95
+          Height = 21
+          DataField = 'DATA_FECHAMENTO'
+          DataSource = dsOrdem
+          TabOrder = 3
+          OnKeyPress = edtDataFechamentoKeyPress
+        end
+        object cmbStatus: TDBComboBox
+          Left = 322
+          Top = 24
+          Width = 104
+          Height = 21
+          DataField = 'STATUS'
+          DataSource = dsOrdem
+          Items.Strings = (
+            'Aberta'
+            'Em Andamento'
+            'Conclu'#237'da'
+            'Cancelada')
+          TabOrder = 4
+        end
+        object mmDescProblema: TDBMemo
+          Left = 16
+          Top = 108
+          Width = 537
+          Height = 89
+          DataField = 'DESCRICAO_PROBLEMA'
+          DataSource = dsOrdem
+          TabOrder = 5
+        end
+        object edtValorTotal: TDBEdit
+          Left = 432
+          Top = 24
+          Width = 121
+          Height = 21
+          DataField = 'VALOR_TOTAL'
+          DataSource = dsOrdem
+          TabOrder = 6
+        end
+        object edtClienteOrd: TDBEdit
+          Left = 16
+          Top = 66
+          Width = 121
+          Height = 21
+          DataField = 'CLIENTE_ID'
+          DataSource = dsOrdem
+          ReadOnly = True
+          TabOrder = 7
+        end
+        object btnBuscarCliente: TButton
+          Left = 143
+          Top = 66
+          Width = 75
+          Height = 21
+          Caption = 'Busca Cliente'
+          TabOrder = 8
+          OnClick = btnBuscarClienteClick
+        end
+      end
     end
-    object Label2: TLabel
-      Left = 16
-      Top = 48
-      Width = 108
-      Height = 13
-      Caption = 'Descri'#231#227'o do problema'
-    end
-    object Label3: TLabel
-      Left = 119
-      Top = 6
-      Width = 65
-      Height = 13
-      Caption = 'Data Prevista'
-    end
-    object Telefone: TLabel
-      Left = 496
-      Top = 6
-      Width = 42
-      Height = 13
-      Caption = 'Telefone'
-    end
-    object Label4: TLabel
-      Left = 222
-      Top = 8
-      Width = 98
-      Height = 13
-      Caption = 'Data de fechamento'
-    end
-    object Label5: TLabel
-      Left = 326
-      Top = 8
-      Width = 31
-      Height = 13
-      Caption = 'Status'
-    end
-    object GridCliente: TDBGrid
-      Left = 1
-      Top = 234
-      Width = 570
-      Height = 126
-      Align = alBottom
-      DataSource = dsOrdem
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-    end
-    object edtDataAbertura: TDBEdit
-      Left = 16
-      Top = 24
-      Width = 97
-      Height = 21
-      DataField = 'DATA_ABERTURA'
-      DataSource = dsOrdem
-      TabOrder = 1
-      OnKeyPress = edtDataAberturaKeyPress
-    end
-    object edtDataPrevista: TDBEdit
-      Left = 119
-      Top = 24
-      Width = 97
-      Height = 21
-      DataField = 'DATA_PREVISTA'
-      DataSource = dsOrdem
-      TabOrder = 2
-      OnKeyPress = edtDataPrevistaKeyPress
-    end
-    object edtDataFechamento: TDBEdit
-      Left = 222
-      Top = 24
-      Width = 98
-      Height = 21
-      DataField = 'DATA_FECHAMENTO'
-      DataSource = dsOrdem
-      TabOrder = 3
-      OnKeyPress = edtDataFechamentoKeyPress
-    end
-    object DBComboBox1: TDBComboBox
-      Left = 326
-      Top = 24
-      Width = 145
-      Height = 21
-      Items.Strings = (
-        'Aberta'
-        'Em Andamento'
-        'Conclu'#237'da'
-        'Cancelada')
-      TabOrder = 4
-    end
-    object mmDescProblema: TDBMemo
-      Left = 16
-      Top = 67
-      Width = 537
-      Height = 89
-      TabOrder = 5
+    object tsItemOrdem: TTabSheet
+      Caption = 'Itens da ordem'
+      ImageIndex = 1
+      object pnlCrudItemOrdem: TPanel
+        Left = 0
+        Top = 0
+        Width = 564
+        Height = 330
+        Align = alClient
+        TabOrder = 0
+        object gridItensOrd: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 562
+          Height = 328
+          Align = alClient
+          DataSource = dsItemOrd
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'C'#243'd. ordem'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Descri'#231#227'o do item'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'QUANTIDADE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Valor unit'#225'rio'
+              Width = 70
+              Visible = True
+            end>
+        end
+      end
     end
   end
   object dsOrdem: TDataSource
     DataSet = DMPrincipal.FDOrdServico
-    Left = 512
-    Top = 201
+    Left = 528
+    Top = 297
+  end
+  object dsItemOrd: TDataSource
+    DataSet = DMPrincipal.FDItemOrd
+    Left = 532
+    Top = 252
   end
 end

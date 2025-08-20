@@ -16,20 +16,30 @@ type
     btnExcluir: TSpeedButton;
     btnSalvar: TSpeedButton;
     btnCancelar: TSpeedButton;
-    PnlCrudCliente: TPanel;
+    dsOrdem: TDataSource;
+    pcPrincipal: TPageControl;
+    tsOrdemServico: TTabSheet;
+    tsItemOrdem: TTabSheet;
+    pnlCrudOrdem: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Telefone: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
     GridCliente: TDBGrid;
-    dsOrdem: TDataSource;
     edtDataAbertura: TDBEdit;
     edtDataPrevista: TDBEdit;
     edtDataFechamento: TDBEdit;
-    Label4: TLabel;
-    DBComboBox1: TDBComboBox;
-    Label5: TLabel;
+    cmbStatus: TDBComboBox;
     mmDescProblema: TDBMemo;
+    edtValorTotal: TDBEdit;
+    pnlCrudItemOrdem: TPanel;
+    gridItensOrd: TDBGrid;
+    dsItemOrd: TDataSource;
+    edtClienteOrd: TDBEdit;
+    Label6: TLabel;
+    btnBuscarCliente: TButton;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -39,6 +49,8 @@ type
     procedure edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
     procedure edtDataFechamentoKeyPress(Sender: TObject; var Key: Char);
     procedure btnEditarClick(Sender: TObject);
+    procedure pcPrincipalChange(Sender: TObject);
+    procedure btnBuscarClienteClick(Sender: TObject);
   private
     procedure ControlarBotoes;
     procedure AplicarMascaraData(AEdtData: TDBEdit; var Key: Char);
@@ -53,38 +65,83 @@ implementation
 
 {$R *.dfm}
 
-uses UDMPrincipal;
+uses UDMPrincipal, UBuscarCliente;
+
+procedure TCadOrdem.btnBuscarClienteClick(Sender: TObject);
+var
+  vForm: TBuscarCliente;
+begin
+  vForm := TBuscarCliente.Create(nil);
+  try
+    vForm.ShowModal;
+    DMPrincipal.FDOrdServicoCLIENTE_ID.AsInteger := vForm.Cliente;
+  finally
+    vForm.Free
+  end;
+end;
 
 procedure TCadOrdem.btnCancelarClick(Sender: TObject);
 begin
-  DMPrincipal.FDOrdServico.Cancel;
-  DMPrincipal.FDOrdServico.Refresh;
+  if pcPrincipal.ActivePageIndex = 0 then
+  begin
+    DMPrincipal.FDOrdServico.Cancel;
+    DMPrincipal.FDOrdServico.Refresh;
+  end
+  else
+  begin
+    DMPrincipal.FDItemOrd.Cancel;
+    DMPrincipal.FDItemOrd.Refresh;
+  end;
+
   ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnEditarClick(Sender: TObject);
 begin
-  DMPrincipal.FDOrdServico.Edit;
+  if pcPrincipal.ActivePageIndex = 0 then
+    DMPrincipal.FDOrdServico.Edit
+  else
+    DMPrincipal.FDOrdServico.Edit;
+
   ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnExcluirClick(Sender: TObject);
 begin
-  DMPrincipal.FDOrdServico.Delete;
-  DMPrincipal.FDOrdServico.Refresh;
+  if pcPrincipal.ActivePageIndex = 0 then
+  begin
+    DMPrincipal.FDOrdServico.Delete;
+    DMPrincipal.FDOrdServico.Refresh;
+  end
+  else
+  begin
+    DMPrincipal.FDItemOrd.Delete;
+    DMPrincipal.FDItemOrd.Refresh;
+  end;
   ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnInserirClick(Sender: TObject);
 begin
-  DMPrincipal.FDOrdServico.Append;
+  if pcPrincipal.ActivePageIndex = 0 then
+    DMPrincipal.FDOrdServico.Append
+  else
+    DMPrincipal.FDItemOrd.Append;
   ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnSalvarClick(Sender: TObject);
 begin
-  DMPrincipal.FDOrdServico.Post;
-  DMPrincipal.FDOrdServico.Refresh;
+  if pcPrincipal.ActivePageIndex = 0 then
+  begin
+    DMPrincipal.FDOrdServico.Post;
+    DMPrincipal.FDOrdServico.Refresh;
+  end
+  else
+  begin
+    DMPrincipal.FDItemOrd.Post;
+    DMPrincipal.FDItemOrd.Refresh;
+  end;
   ControlarBotoes;
 end;
 
@@ -92,12 +149,14 @@ procedure TCadOrdem.ControlarBotoes;
 begin
   btnInserir.Enabled := not(DMPrincipal.FDOrdServico.State
     in [dsInsert, dsEdit]);
-  btnEditar.Enabled := (DMPrincipal.FDOrdServico.RecordCount > 0) and
+  btnEditar.Enabled := (not DMPrincipal.FDOrdServico.IsEmpty) and
     btnInserir.Enabled;
-  btnExcluir.Enabled := (DMPrincipal.FDOrdServico.RecordCount > 0) and
+  btnExcluir.Enabled := (not DMPrincipal.FDOrdServico.IsEmpty) and
     btnInserir.Enabled;
   btnSalvar.Enabled := DMPrincipal.FDOrdServico.State in [dsInsert, dsEdit];
   btnCancelar.Enabled := DMPrincipal.FDOrdServico.State in [dsInsert, dsEdit];
+  btnBuscarCliente.Enabled := DMPrincipal.FDOrdServico.State
+    in [dsInsert, dsEdit];
 end;
 
 procedure TCadOrdem.edtDataAberturaKeyPress(Sender: TObject; var Key: Char);
@@ -118,6 +177,28 @@ end;
 procedure TCadOrdem.FormShow(Sender: TObject);
 begin
   DMPrincipal.FDOrdServico.Open;
+  ControlarBotoes;
+end;
+
+procedure TCadOrdem.pcPrincipalChange(Sender: TObject);
+begin
+  if pcPrincipal.ActivePageIndex = 0 then
+  begin
+    DMPrincipal.FDOrdServico.Close;
+    DMPrincipal.FDOrdServico.Open;
+  end
+  else if (not DMPrincipal.FDOrdServico.IsEmpty) then
+  begin
+    DMPrincipal.FDItemOrd.Close;
+    DMPrincipal.FDItemOrd.ParamByName('IDPAI').AsInteger :=
+      DMPrincipal.FDOrdServicoID.AsInteger;
+    DMPrincipal.FDItemOrd.Open;
+  end
+  else
+  begin
+    ShowMessage('É preciso cadastrar uma ordem antes dos itens');
+    pcPrincipal.ActivePage := tsOrdemServico;
+  end;
 end;
 
 procedure TCadOrdem.AplicarMascaraData(AEdtData: TDBEdit; var Key: Char);
