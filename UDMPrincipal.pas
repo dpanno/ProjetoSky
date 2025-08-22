@@ -36,10 +36,12 @@ type
     FDItemOrdDESCRICAO: TStringField;
     FDItemOrdQUANTIDADE: TBCDField;
     FDItemOrdVALOR_UNITARIO: TBCDField;
-    procedure FDClienteAfterPost(DataSet: TDataSet);
     procedure FDItemOrdNewRecord(DataSet: TDataSet);
+    procedure FDItemOrdBeforePost(DataSet: TDataSet);
+    procedure FDItemOrdAfterPost(DataSet: TDataSet);
+    procedure FDItemOrdAfterDelete(DataSet: TDataSet);
   private
-    { Private declarations }
+    procedure CalculaTotalOrdem;
   public
     { Public declarations }
   end;
@@ -51,15 +53,49 @@ var
 
 implementation
 
-procedure TDMPrincipal.FDClienteAfterPost(DataSet: TDataSet);
+procedure TDMPrincipal.FDItemOrdBeforePost(DataSet: TDataSet);
 begin
 
+end;
+
+procedure TDMPrincipal.FDItemOrdAfterDelete(DataSet: TDataSet);
+begin
+  CalculaTotalOrdem;
+end;
+
+procedure TDMPrincipal.FDItemOrdAfterPost(DataSet: TDataSet);
+begin
+  CalculaTotalOrdem;
 end;
 
 procedure TDMPrincipal.FDItemOrdNewRecord(DataSet: TDataSet);
 begin
   DataSet.FieldByName('ORDEM_ID').AsInteger := FDOrdServico.FieldByName('ID')
     .AsInteger;
+end;
+
+procedure TDMPrincipal.CalculaTotalOrdem;
+var
+  vTotalOrdem: Double;
+begin
+  vTotalOrdem := 0;
+
+  FDItemOrd.DisableControls;
+  try
+    FDItemOrd.First;
+    while not FDItemOrd.Eof do
+    begin
+      vTotalOrdem := vTotalOrdem + (FDItemOrd.FieldByName('QUANTIDADE').AsFloat
+        * FDItemOrd.FieldByName('VALOR_UNITARIO').AsFloat);
+      FDItemOrd.Next;
+    end;
+  finally
+    FDItemOrd.EnableControls;
+  end;
+
+  FDOrdServico.Edit;
+  FDOrdServicoVALOR_TOTAL.AsFloat := vTotalOrdem;
+  FDOrdServico.Post;
 end;
 
 initialization

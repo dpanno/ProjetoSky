@@ -14,7 +14,6 @@ object DMPrincipal: TDMPrincipal
     Top = 256
   end
   object FDCliente: TFDQuery
-    AfterPost = FDClienteAfterPost
     Connection = FDConnection
     UpdateOptions.UpdateTableName = 'CLIENTE'
     UpdateOptions.KeyFields = 'ID'
@@ -123,11 +122,15 @@ object DMPrincipal: TDMPrincipal
       DisplayLabel = 'Valor total'
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
+      currency = True
       Precision = 18
       Size = 2
     end
   end
   object FDItemOrd: TFDQuery
+    BeforePost = FDItemOrdBeforePost
+    AfterPost = FDItemOrdAfterPost
+    AfterDelete = FDItemOrdAfterDelete
     OnNewRecord = FDItemOrdNewRecord
     Connection = FDConnection
     SQL.Strings = (
@@ -139,7 +142,7 @@ object DMPrincipal: TDMPrincipal
       '    ITEM_ORDEM A'
       'WHERE'
       '    A.ORDEM_ID = :IDPAI')
-    Left = 224
+    Left = 208
     Top = 56
     ParamData = <
       item
@@ -151,7 +154,6 @@ object DMPrincipal: TDMPrincipal
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
     object FDItemOrdORDEM_ID: TIntegerField
       DisplayLabel = 'C'#243'd ordem'

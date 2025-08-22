@@ -293,7 +293,7 @@ object CadOrdem: TCadOrdem
     Top = 41
     Width = 572
     Height = 361
-    ActivePage = tsItemOrdem
+    ActivePage = tsOrdemServico
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
@@ -472,6 +472,7 @@ object CadOrdem: TCadOrdem
           Height = 21
           DataField = 'VALOR_TOTAL'
           DataSource = dsOrdem
+          ReadOnly = True
           TabOrder = 6
         end
         object edtClienteOrd: TDBEdit
@@ -526,23 +527,25 @@ object CadOrdem: TCadOrdem
             end
             item
               Expanded = False
-              FieldName = 'C'#243'd. ordem'
+              FieldName = 'ORDEM_ID'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'Descri'#231#227'o do item'
+              FieldName = 'DESCRICAO'
+              Width = 200
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'QUANTIDADE'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'Valor unit'#225'rio'
-              Width = 70
+              FieldName = 'VALOR_UNITARIO'
+              Width = 100
               Visible = True
             end>
         end
@@ -551,12 +554,12 @@ object CadOrdem: TCadOrdem
   end
   object dsOrdem: TDataSource
     DataSet = DMPrincipal.FDOrdServico
-    Left = 528
-    Top = 297
+    Left = 520
+    Top = 305
   end
   object dsItemOrd: TDataSource
     DataSet = DMPrincipal.FDItemOrd
-    Left = 532
-    Top = 252
+    Left = 524
+    Top = 260
   end
 end

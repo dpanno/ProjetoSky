@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
+  System.Classes, Vcl.Graphics, FireDAC.Comp.Client,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
 
@@ -52,7 +52,7 @@ type
     procedure pcPrincipalChange(Sender: TObject);
     procedure btnBuscarClienteClick(Sender: TObject);
   private
-    procedure ControlarBotoes;
+    procedure ControlarBotoes(AQuery: TFDQuery);
     procedure AplicarMascaraData(AEdtData: TDBEdit; var Key: Char);
   public
     { Public declarations }
@@ -86,24 +86,28 @@ begin
   begin
     DMPrincipal.FDOrdServico.Cancel;
     DMPrincipal.FDOrdServico.Refresh;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
   end
   else
   begin
     DMPrincipal.FDItemOrd.Cancel;
     DMPrincipal.FDItemOrd.Refresh;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
   end;
-
-  ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnEditarClick(Sender: TObject);
 begin
   if pcPrincipal.ActivePageIndex = 0 then
-    DMPrincipal.FDOrdServico.Edit
-  else
+  begin
     DMPrincipal.FDOrdServico.Edit;
-
-  ControlarBotoes;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
+  end
+  else
+  begin
+    DMPrincipal.FDOrdServico.Edit;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
+  end;
 end;
 
 procedure TCadOrdem.btnExcluirClick(Sender: TObject);
@@ -112,22 +116,28 @@ begin
   begin
     DMPrincipal.FDOrdServico.Delete;
     DMPrincipal.FDOrdServico.Refresh;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
   end
   else
   begin
     DMPrincipal.FDItemOrd.Delete;
     DMPrincipal.FDItemOrd.Refresh;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
   end;
-  ControlarBotoes;
 end;
 
 procedure TCadOrdem.btnInserirClick(Sender: TObject);
 begin
   if pcPrincipal.ActivePageIndex = 0 then
-    DMPrincipal.FDOrdServico.Append
+  begin
+    DMPrincipal.FDOrdServico.Append;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
+  end
   else
+  begin
     DMPrincipal.FDItemOrd.Append;
-  ControlarBotoes;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
+  end;
 end;
 
 procedure TCadOrdem.btnSalvarClick(Sender: TObject);
@@ -136,27 +146,24 @@ begin
   begin
     DMPrincipal.FDOrdServico.Post;
     DMPrincipal.FDOrdServico.Refresh;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
   end
   else
   begin
     DMPrincipal.FDItemOrd.Post;
     DMPrincipal.FDItemOrd.Refresh;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
   end;
-  ControlarBotoes;
 end;
 
-procedure TCadOrdem.ControlarBotoes;
+procedure TCadOrdem.ControlarBotoes(AQuery: TFDQuery);
 begin
-  btnInserir.Enabled := not(DMPrincipal.FDOrdServico.State
-    in [dsInsert, dsEdit]);
-  btnEditar.Enabled := (not DMPrincipal.FDOrdServico.IsEmpty) and
-    btnInserir.Enabled;
-  btnExcluir.Enabled := (not DMPrincipal.FDOrdServico.IsEmpty) and
-    btnInserir.Enabled;
-  btnSalvar.Enabled := DMPrincipal.FDOrdServico.State in [dsInsert, dsEdit];
-  btnCancelar.Enabled := DMPrincipal.FDOrdServico.State in [dsInsert, dsEdit];
-  btnBuscarCliente.Enabled := DMPrincipal.FDOrdServico.State
-    in [dsInsert, dsEdit];
+  btnInserir.Enabled := not(AQuery.State in [dsInsert, dsEdit]);
+  btnEditar.Enabled := (not AQuery.IsEmpty) and btnInserir.Enabled;
+  btnExcluir.Enabled := (not AQuery.IsEmpty) and btnInserir.Enabled;
+  btnSalvar.Enabled := AQuery.State in [dsInsert, dsEdit];
+  btnCancelar.Enabled := AQuery.State in [dsInsert, dsEdit];
+  btnBuscarCliente.Enabled := AQuery.State in [dsInsert, dsEdit];
 end;
 
 procedure TCadOrdem.edtDataAberturaKeyPress(Sender: TObject; var Key: Char);
@@ -177,7 +184,7 @@ end;
 procedure TCadOrdem.FormShow(Sender: TObject);
 begin
   DMPrincipal.FDOrdServico.Open;
-  ControlarBotoes;
+  ControlarBotoes(DMPrincipal.FDOrdServico);
 end;
 
 procedure TCadOrdem.pcPrincipalChange(Sender: TObject);
@@ -186,6 +193,7 @@ begin
   begin
     DMPrincipal.FDOrdServico.Close;
     DMPrincipal.FDOrdServico.Open;
+    ControlarBotoes(DMPrincipal.FDOrdServico);
   end
   else if (not DMPrincipal.FDOrdServico.IsEmpty) then
   begin
@@ -193,6 +201,7 @@ begin
     DMPrincipal.FDItemOrd.ParamByName('IDPAI').AsInteger :=
       DMPrincipal.FDOrdServicoID.AsInteger;
     DMPrincipal.FDItemOrd.Open;
+    ControlarBotoes(DMPrincipal.FDItemOrd);
   end
   else
   begin
