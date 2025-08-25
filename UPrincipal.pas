@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls, UConsulta,
+  UDMPrincipal;
 
 type
   TPrincipal = class(TForm)
@@ -22,6 +23,7 @@ type
     Ordemdeservio3: TMenuItem;
     procedure Cadastrodeordemdeservio2Click(Sender: TObject);
     procedure Ordemdeservio3Click(Sender: TObject);
+    procedure Ordemdeservio1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +42,11 @@ uses UCliente, UCadOrdem;
 procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
 begin
   TCliente.Create(Self).Show;
+end;
+
+procedure TPrincipal.Ordemdeservio1Click(Sender: TObject);
+begin
+  TConsulta.Create(Self).Show;
 end;
 
 procedure TPrincipal.Ordemdeservio3Click(Sender: TObject);

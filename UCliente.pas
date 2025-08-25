@@ -48,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses UDMCrud, UDMPrincipal;
+uses UDMPrincipal;
 
 procedure TCliente.ControlarBotoes;
 begin
@@ -101,6 +101,7 @@ end;
 
 procedure TCliente.FormShow(Sender: TObject);
 begin
+  DMPrincipal.FDCliente.Close;
   DMPrincipal.FDCliente.Open;
   ControlarBotoes;
 end;

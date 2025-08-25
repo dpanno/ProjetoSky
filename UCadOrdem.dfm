@@ -11,6 +11,7 @@ object CadOrdem: TCadOrdem
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -323,28 +324,28 @@ object CadOrdem: TCadOrdem
         end
         object Label3: TLabel
           Left = 117
-          Top = 6
+          Top = 8
           Width = 65
           Height = 13
           Caption = 'Data Prevista'
         end
         object Telefone: TLabel
           Left = 432
-          Top = 5
+          Top = 8
           Width = 49
           Height = 13
           Caption = 'Valor total'
         end
         object Label4: TLabel
           Left = 218
-          Top = 6
+          Top = 8
           Width = 98
           Height = 13
           Caption = 'Data de fechamento'
         end
         object Label5: TLabel
           Left = 322
-          Top = 5
+          Top = 8
           Width = 31
           Height = 13
           Caption = 'Status'

@@ -388,21 +388,25 @@ object Cliente: TCliente
         item
           Expanded = False
           FieldName = 'DOCUMENTO'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'EMAIL'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TELEFONE'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DATACADASTRO'
+          Width = 64
           Visible = True
         end>
     end

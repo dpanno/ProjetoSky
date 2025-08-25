@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, FireDAC.Comp.Client,
+  System.Classes, Vcl.Graphics, FireDAC.Comp.Client, UDMPrincipal,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
 
@@ -51,6 +51,7 @@ type
     procedure btnEditarClick(Sender: TObject);
     procedure pcPrincipalChange(Sender: TObject);
     procedure btnBuscarClienteClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure ControlarBotoes(AQuery: TFDQuery);
     procedure AplicarMascaraData(AEdtData: TDBEdit; var Key: Char);
@@ -65,7 +66,7 @@ implementation
 
 {$R *.dfm}
 
-uses UDMPrincipal, UBuscarCliente;
+uses UBuscarCliente;
 
 procedure TCadOrdem.btnBuscarClienteClick(Sender: TObject);
 var
@@ -179,6 +180,11 @@ end;
 procedure TCadOrdem.edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
 begin
   AplicarMascaraData(TDBEdit(Sender), Key);
+end;
+
+procedure TCadOrdem.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DMPrincipal.FDOrdServico.Close;
 end;
 
 procedure TCadOrdem.FormShow(Sender: TObject);
