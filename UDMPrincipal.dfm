@@ -185,4 +185,66 @@ object DMPrincipal: TDMPrincipal
       Size = 2
     end
   end
+  object FDConsulta: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT'
+      
+        '    A.ID, A.CLIENTE_ID, A.DATA_ABERTURA, A.DATA_PREVISTA, A.DATA' +
+        '_FECHAMENTO,'
+      '    A.STATUS, A.DESCRICAO_PROBLEMA, A.VALOR_TOTAL'
+      'FROM'
+      '    ORDEM_SERVICO A'
+      'WHERE 1=1'
+      '  &FILTROS')
+    Left = 272
+    Top = 56
+    MacroData = <
+      item
+        Value = Null
+        Name = 'FILTROS'
+        DataType = mdIdentifier
+      end>
+    object FDConsultaID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDConsultaCLIENTE_ID: TIntegerField
+      FieldName = 'CLIENTE_ID'
+      Origin = 'CLIENTE_ID'
+      Required = True
+    end
+    object FDConsultaDATA_ABERTURA: TDateField
+      FieldName = 'DATA_ABERTURA'
+      Origin = 'DATA_ABERTURA'
+      Required = True
+    end
+    object FDConsultaDATA_PREVISTA: TDateField
+      FieldName = 'DATA_PREVISTA'
+      Origin = 'DATA_PREVISTA'
+    end
+    object FDConsultaDATA_FECHAMENTO: TDateField
+      FieldName = 'DATA_FECHAMENTO'
+      Origin = 'DATA_FECHAMENTO'
+    end
+    object FDConsultaSTATUS: TStringField
+      FieldName = 'STATUS'
+      Origin = 'STATUS'
+      Required = True
+      Size = 15
+    end
+    object FDConsultaDESCRICAO_PROBLEMA: TStringField
+      FieldName = 'DESCRICAO_PROBLEMA'
+      Origin = 'DESCRICAO_PROBLEMA'
+      Size = 500
+    end
+    object FDConsultaVALOR_TOTAL: TBCDField
+      FieldName = 'VALOR_TOTAL'
+      Origin = 'VALOR_TOTAL'
+      Precision = 18
+      Size = 2
+    end
+  end
 end

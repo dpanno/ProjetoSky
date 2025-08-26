@@ -24,7 +24,7 @@ type
     rgStatus: TRadioGroup;
     edtVlrTotal: TEdit;
     Label2: TLabel;
-    ComboBox1: TComboBox;
+    cbMaior: TComboBox;
     gridConsulta: TDBGrid;
     dsConsulta: TDataSource;
     procedure edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
@@ -85,22 +85,57 @@ begin
 end;
 
 procedure TConsulta.btnProcurarClick(Sender: TObject);
+var
+  vFiltro: string;
 begin
   if Trim(edtDataAbertura.Text) = '' then
   begin
     ShowMessage('Informe a data de abertura');
     Exit;
     edtDataAbertura.SetFocus;
-  end
-  else if Trim(edtDataPrevista.Text) = '' then
+  end;
+
+  if Trim(edtDataPrevista.Text) = '' then
   begin
     ShowMessage('Informe a data de abertura');
     Exit;
     edtDataPrevista.SetFocus;
   end;
 
-  ShowMessage(DMPrincipal.FDOrdServico.SQL.CommaText);
+  vFiltro := '';
 
+  vFiltro := vFiltro + ' AND A.DATA_ABERTURA >= :P_DATA_ABERTURA ';
+  vFiltro := vFiltro + ' AND A.DATA_FECHAMENTO <= :P_DATA_FECHAMENTO ';
+
+  if (Trim(edtClienteOrd.Text) <> '') then
+    vFiltro := vFiltro + ' AND A.CLIENTE_ID = :P_CLIENTE ';
+
+  if (Trim(edtVlrTotal.Text) <> '') then
+  begin
+    case cbMaior.ItemIndex of
+      0:
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL = :P_VALOR ';
+      1:
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL >= :P_VALOR ';
+      2:
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL <= :P_VALOR ';
+    end;
+  end;
+
+  case rgStatus.ItemIndex of
+    0:
+      vFiltro := vFiltro + ' AND A.STATUS = ''ABERTA'' ';
+    1:
+      vFiltro := vFiltro + ' AND A.STATUS = ''EM ANDAMENTO'' ';
+    2:
+      vFiltro := vFiltro + ' AND A.STATUS = ''CONCLUIDA'' ';
+    3:
+      vFiltro := vFiltro + ' AND A.STATUS = ''CANCELADA'' ';
+  end;
+
+  DMPrincipal.FDConsulta.Close;
+  DMPrincipal.FDConsulta.MacroByName('FILTROS').AsRaw := vFiltro;
+  DMPrincipal.FDConsulta.Open;
 end;
 
 procedure TConsulta.edtDataAberturaKeyPress(Sender: TObject; var Key: Char);

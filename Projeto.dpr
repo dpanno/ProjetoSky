@@ -7,7 +7,8 @@ uses
   UDMPrincipal in 'UDMPrincipal.pas' {DMPrincipal: TDataModule},
   UCadOrdem in 'UCadOrdem.pas' {CadOrdem},
   UConsulta in 'UConsulta.pas' {Consulta},
-  UBuscarCliente in 'UBuscarCliente.pas' {BuscarCliente};
+  UBuscarCliente in 'UBuscarCliente.pas' {BuscarCliente},
+  URelatorio in 'URelatorio.pas' {Relatorio};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.CreateForm(TCadOrdem, CadOrdem);
   Application.CreateForm(TConsulta, Consulta);
   Application.CreateForm(TBuscarCliente, BuscarCliente);
+  Application.CreateForm(TRelatorio, Relatorio);
   Application.Run;
 end.

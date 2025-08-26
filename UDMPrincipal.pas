@@ -36,6 +36,15 @@ type
     FDItemOrdDESCRICAO: TStringField;
     FDItemOrdQUANTIDADE: TBCDField;
     FDItemOrdVALOR_UNITARIO: TBCDField;
+    FDConsulta: TFDQuery;
+    FDConsultaID: TIntegerField;
+    FDConsultaCLIENTE_ID: TIntegerField;
+    FDConsultaDATA_ABERTURA: TDateField;
+    FDConsultaDATA_PREVISTA: TDateField;
+    FDConsultaDATA_FECHAMENTO: TDateField;
+    FDConsultaSTATUS: TStringField;
+    FDConsultaDESCRICAO_PROBLEMA: TStringField;
+    FDConsultaVALOR_TOTAL: TBCDField;
     procedure FDItemOrdNewRecord(DataSet: TDataSet);
     procedure FDItemOrdBeforePost(DataSet: TDataSet);
     procedure FDItemOrdAfterPost(DataSet: TDataSet);

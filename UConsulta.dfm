@@ -20,7 +20,6 @@ object Consulta: TConsulta
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 576
     object btnProcurar: TSpeedButton
       Left = 7
       Top = 8
@@ -150,8 +149,6 @@ object Consulta: TConsulta
     Height = 377
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = -8
-    ExplicitWidth = 621
     object Label1: TLabel
       Left = 16
       Top = 8
@@ -240,13 +237,13 @@ object Consulta: TConsulta
       TabOrder = 5
       Text = 'edtVlrTotal'
     end
-    object ComboBox1: TComboBox
+    object cbMaior: TComboBox
       Left = 319
       Top = 24
       Width = 58
       Height = 21
       TabOrder = 6
-      Text = 'ComboBox1'
+      Text = 'cbMaior'
       Items.Strings = (
         '='
         '>='
@@ -279,26 +276,31 @@ object Consulta: TConsulta
         item
           Expanded = False
           FieldName = 'DATA_PREVISTA'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DATA_FECHAMENTO'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'STATUS'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DESCRICAO_PROBLEMA'
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'VALOR_TOTAL'
+          Width = 64
           Visible = True
         end>
     end
