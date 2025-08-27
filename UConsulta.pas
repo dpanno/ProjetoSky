@@ -17,7 +17,6 @@ type
     Label1: TLabel;
     Label3: TLabel;
     Label6: TLabel;
-    edtClienteOrd: TDBEdit;
     btnBuscarCliente: TButton;
     edtDataAbertura: TEdit;
     edtDataPrevista: TEdit;
@@ -27,10 +26,12 @@ type
     cbMaior: TComboBox;
     gridConsulta: TDBGrid;
     dsConsulta: TDataSource;
+    edtClienteOrd: TEdit;
     procedure edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
     procedure edtDataAberturaKeyPress(Sender: TObject; var Key: Char);
     procedure btnBuscarClienteClick(Sender: TObject);
     procedure btnProcurarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     procedure AplicarMascaraData(AEdt: TEdit; var Key: Char);
   public
@@ -67,7 +68,7 @@ begin
   if (Length(sData) = 2) or (Length(sData) = 5) then
   begin
     AEdt.Text := sData + '/';
-    AEdt.SelStart := Length(AEdt.Text); // posiciona cursor no final
+    AEdt.SelStart := Length(AEdt.Text);
   end;
 end;
 
@@ -84,6 +85,11 @@ begin
   end;
 end;
 
+procedure TConsulta.btnCancelarClick(Sender: TObject);
+begin
+  DMPrincipal.FDConsulta.Close;
+end;
+
 procedure TConsulta.btnProcurarClick(Sender: TObject);
 var
   vFiltro: string;
@@ -91,34 +97,36 @@ begin
   if Trim(edtDataAbertura.Text) = '' then
   begin
     ShowMessage('Informe a data de abertura');
-    Exit;
     edtDataAbertura.SetFocus;
+    Exit;
   end;
 
   if Trim(edtDataPrevista.Text) = '' then
   begin
     ShowMessage('Informe a data de abertura');
-    Exit;
     edtDataPrevista.SetFocus;
+    Exit;
   end;
 
   vFiltro := '';
 
-  vFiltro := vFiltro + ' AND A.DATA_ABERTURA >= :P_DATA_ABERTURA ';
-  vFiltro := vFiltro + ' AND A.DATA_FECHAMENTO <= :P_DATA_FECHAMENTO ';
+  vFiltro := vFiltro + ' AND A.DATA_ABERTURA >=  ' +
+    QuotedStr(edtDataAbertura.Text);
+  vFiltro := vFiltro + ' AND A.DATA_FECHAMENTO <= ' +
+    QuotedStr(edtDataPrevista.Text);
 
   if (Trim(edtClienteOrd.Text) <> '') then
-    vFiltro := vFiltro + ' AND A.CLIENTE_ID = :P_CLIENTE ';
+    vFiltro := vFiltro + ' AND A.CLIENTE_ID = ' + QuotedStr(edtClienteOrd.Text);
 
   if (Trim(edtVlrTotal.Text) <> '') then
   begin
     case cbMaior.ItemIndex of
       0:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL = :P_VALOR ';
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL = ' + edtVlrTotal.Text;
       1:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL >= :P_VALOR ';
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL >= ' + edtVlrTotal.Text;
       2:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL <= :P_VALOR ';
+        vFiltro := vFiltro + ' AND A.VALOR_TOTAL <= ' + edtVlrTotal.Text;
     end;
   end;
 

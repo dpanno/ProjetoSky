@@ -8,7 +8,8 @@ uses
   UCadOrdem in 'UCadOrdem.pas' {CadOrdem},
   UConsulta in 'UConsulta.pas' {Consulta},
   UBuscarCliente in 'UBuscarCliente.pas' {BuscarCliente},
-  URelatorio in 'URelatorio.pas' {Relatorio};
+  URelatorio in 'URelatorio.pas' {Relatorio},
+  UValidador in 'UValidador.pas' {ValidarPrazOrdem};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.CreateForm(TConsulta, Consulta);
   Application.CreateForm(TBuscarCliente, BuscarCliente);
   Application.CreateForm(TRelatorio, Relatorio);
+  Application.CreateForm(TValidarPrazOrdem, ValidarPrazOrdem);
   Application.Run;
 end.

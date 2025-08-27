@@ -128,7 +128,6 @@ object DMPrincipal: TDMPrincipal
     end
   end
   object FDItemOrd: TFDQuery
-    BeforePost = FDItemOrdBeforePost
     AfterPost = FDItemOrdAfterPost
     AfterDelete = FDItemOrdAfterDelete
     OnNewRecord = FDItemOrdNewRecord
@@ -190,20 +189,49 @@ object DMPrincipal: TDMPrincipal
     SQL.Strings = (
       'SELECT'
       
-        '    A.ID, A.CLIENTE_ID, A.DATA_ABERTURA, A.DATA_PREVISTA, A.DATA' +
-        '_FECHAMENTO,'
-      '    A.STATUS, A.DESCRICAO_PROBLEMA, A.VALOR_TOTAL'
-      'FROM'
-      '    ORDEM_SERVICO A'
+        '  A.ID, A.CLIENTE_ID, A.DATA_ABERTURA, A.DATA_PREVISTA, A.DATA_F' +
+        'ECHAMENTO,'
+      '  A.STATUS, A.DESCRICAO_PROBLEMA, A.VALOR_TOTAL'
+      'FROM ORDEM_SERVICO A'
       'WHERE 1=1'
-      '  &FILTROS')
+      
+        '  AND (:P_DATA_ABERTURA IS NULL OR A.DATA_ABERTURA >= :P_DATA_AB' +
+        'ERTURA)'
+      
+        '  AND (:P_DATA_FECHAMENTO IS NULL OR A.DATA_FECHAMENTO <= :P_DAT' +
+        'A_FECHAMENTO)'
+      '  AND (:P_CLIENTE_ID IS NULL OR A.CLIENTE_ID = :P_CLIENTE_ID)'
+      '  AND (:P_VALOR_TOTAL IS NULL OR'
+      '      (:P_OPERADOR = 0 AND A.VALOR_TOTAL = :P_VALOR_TOTAL) OR'
+      '      (:P_OPERADOR = 1 AND A.VALOR_TOTAL >= :P_VALOR_TOTAL) OR'
+      '      (:P_OPERADOR = 2 AND A.VALOR_TOTAL <= :P_VALOR_TOTAL))'
+      '  AND (:P_STATUS IS NULL OR A.STATUS = :P_STATUS)')
     Left = 272
     Top = 56
-    MacroData = <
+    ParamData = <
       item
-        Value = Null
-        Name = 'FILTROS'
-        DataType = mdIdentifier
+        Name = 'P_DATA_ABERTURA'
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_DATA_FECHAMENTO'
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_CLIENTE_ID'
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_VALOR_TOTAL'
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_OPERADOR'
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_STATUS'
+        ParamType = ptInput
       end>
     object FDConsultaID: TIntegerField
       FieldName = 'ID'
@@ -212,39 +240,51 @@ object DMPrincipal: TDMPrincipal
       Required = True
     end
     object FDConsultaCLIENTE_ID: TIntegerField
+      DisplayLabel = 'Cliente'
       FieldName = 'CLIENTE_ID'
       Origin = 'CLIENTE_ID'
       Required = True
     end
     object FDConsultaDATA_ABERTURA: TDateField
+      DisplayLabel = 'Dt. abertura'
       FieldName = 'DATA_ABERTURA'
       Origin = 'DATA_ABERTURA'
       Required = True
     end
     object FDConsultaDATA_PREVISTA: TDateField
+      DisplayLabel = 'Dt Prevista'
       FieldName = 'DATA_PREVISTA'
       Origin = 'DATA_PREVISTA'
     end
     object FDConsultaDATA_FECHAMENTO: TDateField
+      DisplayLabel = 'Dt. Fechamento'
       FieldName = 'DATA_FECHAMENTO'
       Origin = 'DATA_FECHAMENTO'
     end
     object FDConsultaSTATUS: TStringField
+      DisplayLabel = 'Status'
       FieldName = 'STATUS'
       Origin = 'STATUS'
       Required = True
       Size = 15
     end
     object FDConsultaDESCRICAO_PROBLEMA: TStringField
+      DisplayLabel = 'Descri'#231#227'o do problema'
       FieldName = 'DESCRICAO_PROBLEMA'
       Origin = 'DESCRICAO_PROBLEMA'
       Size = 500
     end
     object FDConsultaVALOR_TOTAL: TBCDField
+      DisplayLabel = 'Valor total'
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
       Precision = 18
       Size = 2
     end
+  end
+  object FDAux: TFDQuery
+    Connection = FDConnection
+    Left = 96
+    Top = 184
   end
 end

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
+  System.Classes, Vcl.Graphics, frxClass, frxRich,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls, UConsulta,
   UDMPrincipal;
 
@@ -24,6 +24,8 @@ type
     procedure Cadastrodeordemdeservio2Click(Sender: TObject);
     procedure Ordemdeservio3Click(Sender: TObject);
     procedure Ordemdeservio1Click(Sender: TObject);
+    procedure Ordemdeservio2Click(Sender: TObject);
+    procedure CalculodeSLA1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,16 +39,26 @@ implementation
 
 {$R *.dfm}
 
-uses UCliente, UCadOrdem;
+uses UCliente, UCadOrdem, URelatorio, UValidador;
 
 procedure TPrincipal.Cadastrodeordemdeservio2Click(Sender: TObject);
 begin
   TCliente.Create(Self).Show;
 end;
 
+procedure TPrincipal.CalculodeSLA1Click(Sender: TObject);
+begin
+  TValidarPrazOrdem.Create(Self).Show;
+end;
+
 procedure TPrincipal.Ordemdeservio1Click(Sender: TObject);
 begin
   TConsulta.Create(Self).Show;
+end;
+
+procedure TPrincipal.Ordemdeservio2Click(Sender: TObject);
+begin
+  TRelatorio.Create(Self).Show
 end;
 
 procedure TPrincipal.Ordemdeservio3Click(Sender: TObject);

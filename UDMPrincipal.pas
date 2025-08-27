@@ -45,14 +45,17 @@ type
     FDConsultaSTATUS: TStringField;
     FDConsultaDESCRICAO_PROBLEMA: TStringField;
     FDConsultaVALOR_TOTAL: TBCDField;
+    FDAux: TFDQuery;
     procedure FDItemOrdNewRecord(DataSet: TDataSet);
-    procedure FDItemOrdBeforePost(DataSet: TDataSet);
     procedure FDItemOrdAfterPost(DataSet: TDataSet);
     procedure FDItemOrdAfterDelete(DataSet: TDataSet);
   private
     procedure CalculaTotalOrdem;
+
   public
-    { Public declarations }
+    procedure MontarParametros(const ADataAbertura, ADataFechamento: TDate;
+      const AClienteID: string; const AValorTotal: Double;
+      const AOperador: Integer; const AStatus: string);
   end;
 
 {$R *.dfm}
@@ -61,11 +64,6 @@ var
   DMPrincipal: TDMPrincipal;
 
 implementation
-
-procedure TDMPrincipal.FDItemOrdBeforePost(DataSet: TDataSet);
-begin
-
-end;
 
 procedure TDMPrincipal.FDItemOrdAfterDelete(DataSet: TDataSet);
 begin
@@ -105,6 +103,46 @@ begin
   FDOrdServico.Edit;
   FDOrdServicoVALOR_TOTAL.AsFloat := vTotalOrdem;
   FDOrdServico.Post;
+end;
+
+procedure TDMPrincipal.MontarParametros(const ADataAbertura, ADataFechamento
+  : TDate; const AClienteID: string; const AValorTotal: Double;
+  const AOperador: Integer; const AStatus: string);
+begin
+  with FDConsulta do
+  begin
+    Close;
+
+    if ADataAbertura = 0 then
+      ParamByName('P_DATA_ABERTURA').Clear
+    else
+      ParamByName('P_DATA_ABERTURA').AsDate := ADataAbertura;
+
+    if ADataFechamento = 0 then
+      ParamByName('P_DATA_FECHAMENTO').Clear
+    else
+      ParamByName('P_DATA_FECHAMENTO').AsDate := ADataFechamento;
+
+    if AClienteID = '' then
+      ParamByName('P_CLIENTE_ID').Clear
+    else
+      ParamByName('P_CLIENTE_ID').AsString := AClienteID;
+
+    if AOperador = -1 then
+      ParamByName('P_VALOR_TOTAL').Clear
+    else
+    begin
+      ParamByName('P_VALOR_TOTAL').AsFloat := AValorTotal;
+      ParamByName('P_OPERADOR').AsInteger := AOperador;
+    end;
+
+    if AStatus = '' then
+      ParamByName('P_STATUS').Clear
+    else
+      ParamByName('P_STATUS').AsString := AStatus;
+
+    Open;
+  end;
 end;
 
 initialization

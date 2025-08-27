@@ -140,6 +140,7 @@ object Consulta: TConsulta
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btnCancelarClick
     end
   end
   object PnlCrudCliente: TPanel
@@ -177,23 +178,13 @@ object Consulta: TConsulta
       Height = 13
       Caption = 'Valor Total'
     end
-    object edtClienteOrd: TDBEdit
-      Left = 383
-      Top = 24
-      Width = 121
-      Height = 21
-      DataField = 'CLIENTE_ID'
-      Enabled = False
-      ReadOnly = True
-      TabOrder = 0
-    end
     object btnBuscarCliente: TButton
       Left = 510
       Top = 24
       Width = 75
       Height = 21
       Caption = 'Busca Cliente'
-      TabOrder = 1
+      TabOrder = 0
       OnClick = btnBuscarClienteClick
     end
     object edtDataAbertura: TEdit
@@ -201,8 +192,7 @@ object Consulta: TConsulta
       Top = 24
       Width = 95
       Height = 21
-      TabOrder = 2
-      Text = 'edtDataAbertura'
+      TabOrder = 1
       OnKeyPress = edtDataAberturaKeyPress
     end
     object edtDataPrevista: TEdit
@@ -210,8 +200,7 @@ object Consulta: TConsulta
       Top = 24
       Width = 95
       Height = 21
-      TabOrder = 3
-      Text = 'edtDataPrevista'
+      TabOrder = 2
       OnKeyPress = edtDataPrevistaKeyPress
     end
     object rgStatus: TRadioGroup
@@ -227,23 +216,21 @@ object Consulta: TConsulta
         'Conclu'#237'da'
         'Cancelada'
         'Todos')
-      TabOrder = 4
+      TabOrder = 7
     end
     object edtVlrTotal: TEdit
       Left = 218
       Top = 24
       Width = 95
       Height = 21
-      TabOrder = 5
-      Text = 'edtVlrTotal'
+      TabOrder = 3
     end
     object cbMaior: TComboBox
       Left = 319
       Top = 24
       Width = 58
       Height = 21
-      TabOrder = 6
-      Text = 'cbMaior'
+      TabOrder = 4
       Items.Strings = (
         '='
         '>='
@@ -256,7 +243,7 @@ object Consulta: TConsulta
       Height = 214
       Align = alBottom
       DataSource = dsConsulta
-      TabOrder = 7
+      TabOrder = 5
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
@@ -276,13 +263,13 @@ object Consulta: TConsulta
         item
           Expanded = False
           FieldName = 'DATA_PREVISTA'
-          Width = 64
+          Width = 72
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DATA_FECHAMENTO'
-          Width = 64
+          Width = 100
           Visible = True
         end
         item
@@ -294,7 +281,7 @@ object Consulta: TConsulta
         item
           Expanded = False
           FieldName = 'DESCRICAO_PROBLEMA'
-          Width = 64
+          Width = 125
           Visible = True
         end
         item
@@ -304,9 +291,17 @@ object Consulta: TConsulta
           Visible = True
         end>
     end
+    object edtClienteOrd: TEdit
+      Left = 383
+      Top = 24
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 6
+    end
   end
   object dsConsulta: TDataSource
-    DataSet = DMPrincipal.FDOrdServico
+    DataSet = DMPrincipal.FDConsulta
     Left = 520
     Top = 249
   end
