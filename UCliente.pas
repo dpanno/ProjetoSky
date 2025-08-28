@@ -63,35 +63,62 @@ end;
 
 procedure TCliente.btnCancelarClick(Sender: TObject);
 begin
-  DMPrincipal.FDCliente.Cancel;
-  DMPrincipal.FDCliente.Refresh;
-  ControlarBotoes;
+  try
+    DMPrincipal.FDCliente.Cancel;
+    DMPrincipal.FDCliente.Refresh;
+    ControlarBotoes;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Cancelar: ' + E.Message);
+  end;
+
 end;
 
 procedure TCliente.btnEditarClick(Sender: TObject);
 begin
-  DMPrincipal.FDCliente.Edit;
-  ControlarBotoes;
+  try
+    DMPrincipal.FDCliente.Edit;
+    ControlarBotoes;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Editar: ' + E.Message);
+  end;
 end;
 
 procedure TCliente.btnExcluirClick(Sender: TObject);
 begin
-  DMPrincipal.FDCliente.Delete;
-  DMPrincipal.FDCliente.Refresh;
-  ControlarBotoes;
+  try
+    DMPrincipal.FDCliente.Delete;
+    DMPrincipal.FDCliente.Refresh;
+    ControlarBotoes;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Excluir: ' + E.Message);
+  end;
+
 end;
 
 procedure TCliente.btnInserirClick(Sender: TObject);
 begin
-  DMPrincipal.FDCliente.Append;
-  ControlarBotoes;
+  try
+    DMPrincipal.FDCliente.Append;
+    ControlarBotoes;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Inserir: ' + E.Message);
+  end;
 end;
 
 procedure TCliente.btnSalvarClick(Sender: TObject);
 begin
-  DMPrincipal.FDCliente.Post;
-  DMPrincipal.FDCliente.Refresh;
-  ControlarBotoes;
+  try
+    DMPrincipal.FDCliente.Post;
+    DMPrincipal.FDCliente.Refresh;
+    ControlarBotoes;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Salvar: ' + E.Message);
+  end;
 end;
 
 procedure TCliente.FormClose(Sender: TObject; var Action: TCloseAction);

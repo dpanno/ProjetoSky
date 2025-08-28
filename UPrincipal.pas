@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, frxClass, frxRich,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls, UConsulta,
-  UDMPrincipal;
+  UDMPrincipal, Vcl.Imaging.jpeg;
 
 type
   TPrincipal = class(TForm)
@@ -21,6 +21,7 @@ type
     Movimentao1: TMenuItem;
     CalculodeSLA1: TMenuItem;
     Ordemdeservio3: TMenuItem;
+    Image1: TImage;
     procedure Cadastrodeordemdeservio2Click(Sender: TObject);
     procedure Ordemdeservio3Click(Sender: TObject);
     procedure Ordemdeservio1Click(Sender: TObject);

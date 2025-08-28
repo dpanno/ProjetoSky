@@ -129,32 +129,44 @@ end;
 
 procedure TCadOrdem.btnInserirClick(Sender: TObject);
 begin
-  if pcPrincipal.ActivePageIndex = 0 then
-  begin
-    DMPrincipal.FDOrdServico.Append;
-    ControlarBotoes(DMPrincipal.FDOrdServico);
-  end
-  else
-  begin
-    DMPrincipal.FDItemOrd.Append;
-    ControlarBotoes(DMPrincipal.FDItemOrd);
+  try
+    if pcPrincipal.ActivePageIndex = 0 then
+    begin
+      DMPrincipal.FDOrdServico.Append;
+      ControlarBotoes(DMPrincipal.FDOrdServico);
+    end
+    else
+    begin
+      DMPrincipal.FDItemOrd.Append;
+      ControlarBotoes(DMPrincipal.FDItemOrd);
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar inserir: ' + E.Message);
   end;
+
 end;
 
 procedure TCadOrdem.btnSalvarClick(Sender: TObject);
 begin
-  if pcPrincipal.ActivePageIndex = 0 then
-  begin
-    DMPrincipal.FDOrdServico.Post;
-    DMPrincipal.FDOrdServico.Refresh;
-    ControlarBotoes(DMPrincipal.FDOrdServico);
-  end
-  else
-  begin
-    DMPrincipal.FDItemOrd.Post;
-    DMPrincipal.FDItemOrd.Refresh;
-    ControlarBotoes(DMPrincipal.FDItemOrd);
+  try
+    if pcPrincipal.ActivePageIndex = 0 then
+    begin
+      DMPrincipal.FDOrdServico.Post;
+      DMPrincipal.FDOrdServico.Refresh;
+      ControlarBotoes(DMPrincipal.FDOrdServico);
+    end
+    else
+    begin
+      DMPrincipal.FDItemOrd.Post;
+      DMPrincipal.FDItemOrd.Refresh;
+      ControlarBotoes(DMPrincipal.FDItemOrd);
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao tentar Salvar: ' + E.Message);
   end;
+
 end;
 
 procedure TCadOrdem.ControlarBotoes(AQuery: TFDQuery);

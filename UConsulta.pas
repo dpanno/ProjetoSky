@@ -34,6 +34,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
   private
     procedure AplicarMascaraData(AEdt: TEdit; var Key: Char);
+    function RetornarStatus: string;
   public
     { Public declarations }
   end;
@@ -44,6 +45,23 @@ var
 implementation
 
 {$R *.dfm}
+
+function TConsulta.RetornarStatus: string;
+begin
+
+  case rgStatus.ItemIndex of
+    0:
+      Result := 'ABERTA';
+    1:
+      Result := 'EM ANDAMENTO';
+    2:
+      Result := 'CONCLUIDA';
+    3:
+      Result := 'CANCELADA';
+  else
+    Result := '';
+  end;
+end;
 
 procedure TConsulta.AplicarMascaraData(AEdt: TEdit; var Key: Char);
 var
@@ -93,6 +111,7 @@ end;
 procedure TConsulta.btnProcurarClick(Sender: TObject);
 var
   vFiltro: string;
+  Valor: Double;
 begin
   if Trim(edtDataAbertura.Text) = '' then
   begin
@@ -108,42 +127,14 @@ begin
     Exit;
   end;
 
-  vFiltro := '';
+  if Trim(edtVlrTotal.Text) = '' then
+    Valor := 0
+  else
+    Valor := StrToFloat(edtVlrTotal.Text);
 
-  vFiltro := vFiltro + ' AND A.DATA_ABERTURA >=  ' +
-    QuotedStr(edtDataAbertura.Text);
-  vFiltro := vFiltro + ' AND A.DATA_FECHAMENTO <= ' +
-    QuotedStr(edtDataPrevista.Text);
-
-  if (Trim(edtClienteOrd.Text) <> '') then
-    vFiltro := vFiltro + ' AND A.CLIENTE_ID = ' + QuotedStr(edtClienteOrd.Text);
-
-  if (Trim(edtVlrTotal.Text) <> '') then
-  begin
-    case cbMaior.ItemIndex of
-      0:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL = ' + edtVlrTotal.Text;
-      1:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL >= ' + edtVlrTotal.Text;
-      2:
-        vFiltro := vFiltro + ' AND A.VALOR_TOTAL <= ' + edtVlrTotal.Text;
-    end;
-  end;
-
-  case rgStatus.ItemIndex of
-    0:
-      vFiltro := vFiltro + ' AND A.STATUS = ''ABERTA'' ';
-    1:
-      vFiltro := vFiltro + ' AND A.STATUS = ''EM ANDAMENTO'' ';
-    2:
-      vFiltro := vFiltro + ' AND A.STATUS = ''CONCLUIDA'' ';
-    3:
-      vFiltro := vFiltro + ' AND A.STATUS = ''CANCELADA'' ';
-  end;
-
-  DMPrincipal.FDConsulta.Close;
-  DMPrincipal.FDConsulta.MacroByName('FILTROS').AsRaw := vFiltro;
-  DMPrincipal.FDConsulta.Open;
+  DMPrincipal.MontarParametros(StrToDateDef(edtDataAbertura.Text, 0),
+    StrToDateDef(edtDataPrevista.Text, 0), edtClienteOrd.Text, Valor,
+    cbMaior.ItemIndex, RetornarStatus);
 end;
 
 procedure TConsulta.edtDataAberturaKeyPress(Sender: TObject; var Key: Char);

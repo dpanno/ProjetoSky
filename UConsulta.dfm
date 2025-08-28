@@ -275,7 +275,6 @@ object Consulta: TConsulta
         item
           Expanded = False
           FieldName = 'STATUS'
-          Width = 64
           Visible = True
         end
         item
@@ -287,7 +286,6 @@ object Consulta: TConsulta
         item
           Expanded = False
           FieldName = 'VALOR_TOTAL'
-          Width = 64
           Visible = True
         end>
     end
