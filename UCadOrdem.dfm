@@ -363,6 +363,7 @@ object CadOrdem: TCadOrdem
           Width = 562
           Height = 123
           Align = alBottom
+          Anchors = [akLeft, akTop, akRight, akBottom]
           DataSource = dsOrdem
           ReadOnly = True
           TabOrder = 0
@@ -390,26 +391,31 @@ object CadOrdem: TCadOrdem
             item
               Expanded = False
               FieldName = 'DATA_PREVISTA'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'DATA_FECHAMENTO'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'STATUS'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'DESCRICAO_PROBLEMA'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VALOR_TOTAL'
+              Width = 64
               Visible = True
             end>
         end

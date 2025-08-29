@@ -22,7 +22,6 @@ object BuscarCliente: TBuscarCliente
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
-    ExplicitHeight = 241
     object GridCliente: TDBGrid
       Left = 1
       Top = 1
@@ -45,7 +44,6 @@ object BuscarCliente: TBuscarCliente
         item
           Expanded = False
           FieldName = 'NOME'
-          Width = 64
           Visible = True
         end
         item
@@ -63,6 +61,7 @@ object BuscarCliente: TBuscarCliente
         item
           Expanded = False
           FieldName = 'TELEFONE'
+          Width = 64
           Visible = True
         end
         item
@@ -80,7 +79,6 @@ object BuscarCliente: TBuscarCliente
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 263
     object btnOK: TButton
       Left = 240
       Top = 9

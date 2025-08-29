@@ -41,6 +41,7 @@ end;
 
 procedure TBuscarCliente.btnOKClick(Sender: TObject);
 begin
+  FCliente := DMPrincipal.FDCliente.FieldByName('ID').AsInteger;
   ModalResult := mrOk;
 end;
 

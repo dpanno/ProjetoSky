@@ -20,7 +20,7 @@ type
     Label2: TLabel;
     btnBuscarCliente: TButton;
     edtDataAbertura: TEdit;
-    edtDataPrevista: TEdit;
+    edtDataFechamento: TEdit;
     rgStatus: TRadioGroup;
     edtVlrTotal: TEdit;
     cbMaior: TComboBox;
@@ -33,7 +33,7 @@ type
     btnExportarPDF: TSpeedButton;
     procedure btnImprimirClick(Sender: TObject);
     procedure edtDataAberturaKeyPress(Sender: TObject; var Key: Char);
-    procedure edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
+    procedure edtDataFechamentoKeyPress(Sender: TObject; var Key: Char);
     procedure btnExportarCSVClick(Sender: TObject);
     procedure btnExportarPDFClick(Sender: TObject);
     procedure btnBuscarClienteClick(Sender: TObject);
@@ -131,10 +131,10 @@ begin
       Exit;
     end;
 
-    if Trim(edtDataPrevista.Text) = '' then
+    if Trim(edtDataFechamento.Text) = '' then
     begin
-      ShowMessage('Informe a data de abertura');
-      edtDataPrevista.SetFocus;
+      ShowMessage('Informe a data de fechamento');
+      edtDataFechamento.SetFocus;
       Exit;
     end;
 
@@ -144,7 +144,7 @@ begin
       Valor := StrToFloat(edtVlrTotal.Text);
 
     DMPrincipal.MontarParametros(StrToDateDef(edtDataAbertura.Text, 0),
-      StrToDateDef(edtDataPrevista.Text, 0), edtClienteOrd.Text, Valor,
+      StrToDateDef(edtDataFechamento.Text, 0), edtClienteOrd.Text, Valor,
       cbMaior.ItemIndex, RetornarStatus);
     Rel.PrepareReport;
     ExportFilter.FileName := FileName;
@@ -180,10 +180,10 @@ begin
       Exit;
     end;
 
-    if Trim(edtDataPrevista.Text) = '' then
+    if Trim(edtDataFechamento.Text) = '' then
     begin
-      ShowMessage('Informe a data de abertura');
-      edtDataPrevista.SetFocus;
+      ShowMessage('Informe a data de fechamento');
+      edtDataFechamento.SetFocus;
       Exit;
     end;
 
@@ -193,7 +193,7 @@ begin
       Valor := StrToFloat(edtVlrTotal.Text);
 
     DMPrincipal.MontarParametros(StrToDateDef(edtDataAbertura.Text, 0),
-      StrToDateDef(edtDataPrevista.Text, 0), edtClienteOrd.Text, Valor,
+      StrToDateDef(edtDataFechamento.Text, 0), edtClienteOrd.Text, Valor,
       cbMaior.ItemIndex, RetornarStatus);
     Rel.PrepareReport;
     ExportFilter.FileName := FileName;
@@ -232,10 +232,10 @@ begin
         Exit;
       end;
 
-      if Trim(edtDataPrevista.Text) = '' then
+      if Trim(edtDataFechamento.Text) = '' then
       begin
-        ShowMessage('Informe a data de abertura');
-        edtDataPrevista.SetFocus;
+        ShowMessage('Informe a data de fechamento');
+        edtDataFechamento.SetFocus;
         Exit;
       end;
 
@@ -245,7 +245,7 @@ begin
         Valor := StrToFloat(edtVlrTotal.Text);
 
       DMPrincipal.MontarParametros(StrToDateDef(edtDataAbertura.Text, 0),
-        StrToDateDef(edtDataPrevista.Text, 0), edtClienteOrd.Text, Valor,
+        StrToDateDef(edtDataFechamento.Text, 0), edtClienteOrd.Text, Valor,
         cbMaior.ItemIndex, RetornarStatus);
       Rel.ShowReport();
     finally
@@ -264,7 +264,7 @@ begin
   AplicarMascaraData(TEdit(Sender), Key);
 end;
 
-procedure TRelatorio.edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
+procedure TRelatorio.edtDataFechamentoKeyPress(Sender: TObject; var Key: Char);
 begin
   AplicarMascaraData(TEdit(Sender), Key);
 end;

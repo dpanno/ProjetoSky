@@ -19,7 +19,7 @@ type
     Label6: TLabel;
     btnBuscarCliente: TButton;
     edtDataAbertura: TEdit;
-    edtDataPrevista: TEdit;
+    edtDataFechamento: TEdit;
     rgStatus: TRadioGroup;
     edtVlrTotal: TEdit;
     Label2: TLabel;
@@ -27,7 +27,9 @@ type
     gridConsulta: TDBGrid;
     dsConsulta: TDataSource;
     edtClienteOrd: TEdit;
-    procedure edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
+    pNav: TPanel;
+    DBNavigator1: TDBNavigator;
+    procedure edtDataFechamentoKeyPress(Sender: TObject; var Key: Char);
     procedure edtDataAberturaKeyPress(Sender: TObject; var Key: Char);
     procedure btnBuscarClienteClick(Sender: TObject);
     procedure btnProcurarClick(Sender: TObject);
@@ -120,10 +122,10 @@ begin
     Exit;
   end;
 
-  if Trim(edtDataPrevista.Text) = '' then
+  if Trim(edtDataFechamento.Text) = '' then
   begin
-    ShowMessage('Informe a data de abertura');
-    edtDataPrevista.SetFocus;
+    ShowMessage('Informe a data de fechamento');
+    edtDataFechamento.SetFocus;
     Exit;
   end;
 
@@ -133,7 +135,7 @@ begin
     Valor := StrToFloat(edtVlrTotal.Text);
 
   DMPrincipal.MontarParametros(StrToDateDef(edtDataAbertura.Text, 0),
-    StrToDateDef(edtDataPrevista.Text, 0), edtClienteOrd.Text, Valor,
+    StrToDateDef(edtDataFechamento.Text, 0), edtClienteOrd.Text, Valor,
     cbMaior.ItemIndex, RetornarStatus);
 end;
 
@@ -142,7 +144,7 @@ begin
   AplicarMascaraData(TEdit(Sender), Key);
 end;
 
-procedure TConsulta.edtDataPrevistaKeyPress(Sender: TObject; var Key: Char);
+procedure TConsulta.edtDataFechamentoKeyPress(Sender: TObject; var Key: Char);
 begin
   AplicarMascaraData(TEdit(Sender), Key);
 end;

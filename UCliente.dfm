@@ -366,6 +366,7 @@ object Cliente: TCliente
       Width = 574
       Height = 209
       Align = alBottom
+      Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dsCliente
       ReadOnly = True
       TabOrder = 4

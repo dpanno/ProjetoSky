@@ -157,9 +157,9 @@ object Relatorio: TRelatorio
     object Label3: TLabel
       Left = 117
       Top = 8
-      Width = 65
+      Width = 85
       Height = 13
-      Caption = 'Data Prevista'
+      Caption = 'Data Fechamento'
     end
     object Label6: TLabel
       Left = 383
@@ -192,13 +192,13 @@ object Relatorio: TRelatorio
       TabOrder = 1
       OnKeyPress = edtDataAberturaKeyPress
     end
-    object edtDataPrevista: TEdit
+    object edtDataFechamento: TEdit
       Left = 117
       Top = 24
       Width = 95
       Height = 21
       TabOrder = 2
-      OnKeyPress = edtDataPrevistaKeyPress
+      OnKeyPress = edtDataFechamentoKeyPress
     end
     object rgStatus: TRadioGroup
       Left = 16
@@ -244,6 +244,8 @@ object Relatorio: TRelatorio
   end
   object frxRelatorio: TfrxReport
     Version = '2022.2.10'
+    DataSet = frxDBDataset1
+    DataSetName = 'frxDBDataset1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
@@ -251,14 +253,14 @@ object Relatorio: TRelatorio
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45894.776678958300000000
-    ReportOptions.LastChange = 45894.867036875000000000
+    ReportOptions.LastChange = 45898.412714687500000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 416
-    Top = 169
+    Left = 504
+    Top = 233
     Datasets = <
       item
         DataSet = frxDBDataset1
@@ -595,7 +597,7 @@ object Relatorio: TRelatorio
         object SysMemo2: TfrxSysMemoView
           AllowVectorExport = True
           Left = 566.929500000000000000
-          Top = 71.811070000000000000
+          Top = 68.031540000000000000
           Width = 147.401670000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -617,8 +619,8 @@ object Relatorio: TRelatorio
     DataSet = DMPrincipal.FDConsulta
     BCDToCurrency = False
     DataSetOptions = []
-    Left = 416
-    Top = 225
+    Left = 504
+    Top = 185
   end
   object frxCSVExport1: TfrxCSVExport
     UseFileCache = True
@@ -631,7 +633,7 @@ object Relatorio: TRelatorio
     OpenAfterExport = False
     NoSysSymbols = True
     ForcedQuotes = False
-    Left = 240
+    Left = 504
     Top = 289
   end
   object frxPDFExport1: TfrxPDFExport
@@ -661,6 +663,6 @@ object Relatorio: TRelatorio
     PDFStandard = psNone
     PDFVersion = pv17
     Left = 504
-    Top = 329
+    Top = 345
   end
 end

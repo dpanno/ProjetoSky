@@ -122,6 +122,7 @@ object DMPrincipal: TDMPrincipal
       DisplayLabel = 'Valor total'
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
+      DisplayFormat = '#,##0.00'
       currency = True
       Precision = 18
       Size = 2
@@ -180,6 +181,7 @@ object DMPrincipal: TDMPrincipal
       FieldName = 'VALOR_UNITARIO'
       Origin = 'VALOR_UNITARIO'
       Required = True
+      DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
@@ -278,6 +280,7 @@ object DMPrincipal: TDMPrincipal
       DisplayLabel = 'Valor total'
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
+      DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end

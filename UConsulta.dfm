@@ -147,9 +147,10 @@ object Consulta: TConsulta
     Left = 0
     Top = 41
     Width = 600
-    Height = 377
+    Height = 343
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 377
     object Label1: TLabel
       Left = 16
       Top = 8
@@ -160,9 +161,9 @@ object Consulta: TConsulta
     object Label3: TLabel
       Left = 117
       Top = 8
-      Width = 65
+      Width = 85
       Height = 13
-      Caption = 'Data Prevista'
+      Caption = 'Data Fechamento'
     end
     object Label6: TLabel
       Left = 383
@@ -195,13 +196,13 @@ object Consulta: TConsulta
       TabOrder = 1
       OnKeyPress = edtDataAberturaKeyPress
     end
-    object edtDataPrevista: TEdit
+    object edtDataFechamento: TEdit
       Left = 117
       Top = 24
       Width = 95
       Height = 21
       TabOrder = 2
-      OnKeyPress = edtDataPrevistaKeyPress
+      OnKeyPress = edtDataFechamentoKeyPress
     end
     object rgStatus: TRadioGroup
       Left = 16
@@ -240,7 +241,7 @@ object Consulta: TConsulta
       Left = 1
       Top = 162
       Width = 598
-      Height = 214
+      Height = 180
       Align = alBottom
       DataSource = dsConsulta
       TabOrder = 5
@@ -296,6 +297,23 @@ object Consulta: TConsulta
       Height = 21
       Enabled = False
       TabOrder = 6
+    end
+  end
+  object pNav: TPanel
+    Left = 0
+    Top = 384
+    Width = 600
+    Height = 34
+    Align = alBottom
+    TabOrder = 2
+    object DBNavigator1: TDBNavigator
+      Left = 7
+      Top = 4
+      Width = 225
+      Height = 25
+      DataSource = dsConsulta
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+      TabOrder = 0
     end
   end
   object dsConsulta: TDataSource
